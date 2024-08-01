@@ -1,5 +1,6 @@
 const express = require('express')
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const router = express.Router()
 const User = require('../models/User')
 
@@ -52,7 +53,9 @@ router.get('/',async(req,res)=> {
 
         const passmatch = bcrypt.compareSync(req.body.password, user.password); 
         if(passmatch){
-            res.status(200).send('it is done')
+
+            const token = jwt.sign({ _id:user._id, email:user.email, name:user.name }, process.env.TOKEN_SECRET);           
+            res.status(200).json(token)
         }
         else{
             return res.status(401).send("unauthorized access")

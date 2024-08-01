@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose');
 const movieRoutes = require('./routes/MovieRoutes')
@@ -28,5 +29,10 @@ main()
 .catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb+srv://farhandeveloper92:A90GoainSzUdLWMm@cluster0.4cuq0ea.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+
+  const url = process.env.DB_URL
+  const password= process.env.DB_PASSWORD
+  const passwithurl= url.replace('<password>',password)
+
+  await mongoose.connect(passwithurl);
 }

@@ -47,4 +47,18 @@ router.get('/',async(req,res)=> {
     
    })
 
+   router.delete('/review',async(req,res)=>{
+    try{
+      await Review.findByIdAndDelete(req.params.reviewId)
+      res.status(204).send("deleted")
+       
+    }
+    catch(error){
+      res.status(404).send("review not fund")
+      console.log(error)
+
+    }
+   })
+
+
 module.exports = router
