@@ -47,7 +47,7 @@ router.get('/',async(req,res)=> {
     
    })
 
-   router.delete('/review',async(req,res)=>{
+   router.delete('/:reviewId',async(req,res)=>{
     try{
       await Review.findByIdAndDelete(req.params.reviewId)
       res.status(204).send("deleted")

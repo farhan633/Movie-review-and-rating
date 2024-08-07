@@ -48,9 +48,9 @@ router.get('/',async(req,res)=> {
    })
 
 
-   router.delete('/movieId',async(req,res)=>{
+   router.delete('/:movieId',async(req,res)=>{
     try{
-      await Movie.findByIdAndDelete(req.params.reviewId)
+      await Movie.findByIdAndDelete(req.params.movieId)
       res.status(204).send("deleted")
        
     }
